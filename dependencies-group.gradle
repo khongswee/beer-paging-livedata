@@ -1,0 +1,91 @@
+def Group(Closure closure) {
+    closure.delegate = dependencies
+    return closure
+}
+
+ext {
+
+    //-------------------------------------------------------------------||
+    // LIBRARIES                                                         ||
+    //-------------------------------------------------------------------||
+
+    libraries = Group {
+        implementation deps.libs
+    }
+
+    //-------------------------------------------------------------------||
+    // KOTLIN                                                            ||
+    //-------------------------------------------------------------------||
+
+    kotlin = Group {
+        implementation deps.kotlin.lib
+        implementation deps.kotlin.ktx
+
+    }
+
+    //-------------------------------------------------------------------||
+    // NETWORKING                                                        ||
+    //-------------------------------------------------------------------||
+
+    networking = Group {
+        implementation deps.retrofit.retrofit
+        implementation deps.retrofit.gson
+        implementation deps.retrofit.rx
+
+        implementation deps.okHttp.logging
+    }
+
+    //-------------------------------------------------------------------||
+    // RX                                                                ||
+    //-------------------------------------------------------------------||
+
+    rx = Group {
+        implementation deps.rx.android
+        implementation deps.rx.java
+    }
+
+    //-------------------------------------------------------------------||
+    // ARCHITECTURE COMPONENT                                            ||
+    //-------------------------------------------------------------------||
+
+    architecture = Group {
+        implementation deps.ac.extensions
+        implementation deps.ac.viewModel
+        implementation deps.ac.liveData
+        implementation deps.ac.paging
+        implementation deps.ac.room
+        implementation deps.ac.roomRx2
+
+
+        kapt deps.ac.roomCompiler
+        testImplementation deps.ac.testing
+    }
+
+    //-------------------------------------------------------------------||
+    // VIEW                                                              ||
+    //-------------------------------------------------------------------||
+
+    view = Group {
+        implementation deps.support.app
+        implementation deps.support.cardView
+        implementation deps.support.recyclerView
+        implementation deps.support.constraint
+
+
+        implementation deps.glide
+    }
+
+    //-------------------------------------------------------------------||
+    // TESTING                                                           ||
+    //-------------------------------------------------------------------||
+
+    testing = Group {
+        testImplementation deps.jUnit
+        testImplementation deps.mockito.core
+        testImplementation deps.mockito.inline
+
+        androidTestImplementation deps.supportTest.runner
+        androidTestImplementation deps.supportTest.espresso
+    }
+
+}

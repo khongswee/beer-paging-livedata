@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+apply from: '../config-android.gradle'
+
+
+enum BuildType {
+    DEBUG
+}
+
+static def getAppName(BuildType buildType) {
+    String APP_NAME = "BeersPagingLiveData"
+    switch (buildType) {
+        case BuildType.DEBUG:
+            return APP_NAME + "-" + BuildType.DEBUG.name
+    }
+}
+android{
+    defaultConfig{
+        applicationId "com.kho.beerpaginglivedata"
+        versionCode 1
+        versionName "1.0."
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+}
+
+dependencies {
+    libraries()
+    kotlin()
+    networking()
+    rx()
+    architecture()
+    view()
+    testing()
+
+}

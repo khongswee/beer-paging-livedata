@@ -1,0 +1,28 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+    }
+    dependencies {
+        apply from: 'dependencies-versions.gradle'
+        apply from: 'dependencies-all.gradle'
+
+        classpath deps.build.gradle
+        classpath deps.build.kotlin
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://kotlin.bintray.com/kotlinx" }
+    }
+
+    dependencies { apply from: "$rootProject.rootDir/dependencies-group.gradle" }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
