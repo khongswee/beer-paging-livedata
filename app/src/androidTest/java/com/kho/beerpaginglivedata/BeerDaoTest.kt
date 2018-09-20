@@ -4,7 +4,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.kho.beerpaginglivedata.data.local.AppDatabase
 import com.kho.beerpaginglivedata.data.local.BeerDao
-import com.kho.beerpaginglivedata.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

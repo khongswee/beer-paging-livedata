@@ -1,9 +1,9 @@
 package com.kho.beerpaginglivedata.unit_test
 
-import com.kho.beerpaginglivedata.data.model.BeerModel
-import com.kho.beerpaginglivedata.data.model.BeerResult
-import com.kho.beerpaginglivedata.data.model.Pager
-import com.kho.beerpaginglivedata.data.remote.BeerApi
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerModel
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.beerlist.data.model.Pager
+import com.kho.beerpaginglivedata.features.beerlist.data.remote_service.BeerApi
 import io.reactivex.Single
 import java.io.IOException
 import java.util.concurrent.atomic.AtomicInteger

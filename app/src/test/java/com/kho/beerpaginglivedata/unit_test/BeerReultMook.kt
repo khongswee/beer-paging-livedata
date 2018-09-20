@@ -1,6 +1,6 @@
 package com.kho.beerpaginglivedata.unit_test
 
-import com.kho.beerpaginglivedata.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
 import java.util.concurrent.atomic.AtomicInteger
 
 class BeerReultMook {

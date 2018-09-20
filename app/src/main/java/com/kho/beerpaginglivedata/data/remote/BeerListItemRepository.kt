@@ -4,14 +4,13 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PagedList
-import com.kho.beerpaginglivedata.data.datasource.itemkey.BeerItemKeyDataDataFactory
-import com.kho.beerpaginglivedata.data.datasource.itemkey.BeerItemKeyDataSource
-import com.kho.beerpaginglivedata.data.datasource.pagekey.BeerPageKeyDataFactory
-import com.kho.beerpaginglivedata.data.datasource.pagekey.BeerPageKeyDatasource
-import com.kho.beerpaginglivedata.data.datasource.positional.BeerPositionDataFactory
-import com.kho.beerpaginglivedata.data.datasource.positional.BeerPositionalDataSource
+import com.kho.beerpaginglivedata.base_domain.NetworkState
+import com.kho.beerpaginglivedata.features.beerlist.data.datasource.itemkey.BeerItemKeyDataDataFactory
+import com.kho.beerpaginglivedata.features.beerlist.data.datasource.itemkey.BeerItemKeyDataSource
 import com.kho.beerpaginglivedata.data.local.ServiceLocal
-import com.kho.beerpaginglivedata.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.domain.BeerRepository
+import com.kho.beerpaginglivedata.features.domain.GroupActionLoadBeer
 
 class BeerListItemRepository( service: ServiceLocal) : BeerRepository {
     val factoryItemKey = BeerItemKeyDataDataFactory(service)
@@ -26,7 +25,7 @@ class BeerListItemRepository( service: ServiceLocal) : BeerRepository {
 
     override fun loadBeer(): GroupActionLoadBeer<BeerResult> {
         val beersList: LiveData<PagedList<BeerResult>>
-        val initialState = Transformations.switchMap<BeerItemKeyDataSource,NetworkState>(
+        val initialState = Transformations.switchMap<BeerItemKeyDataSource, NetworkState>(
                 factoryItemKey.datasource,{it.initialState})
         val networkState = Transformations.switchMap<BeerItemKeyDataSource, NetworkState>(
                 factoryItemKey.datasource, { it.networkState })
@@ -36,6 +35,6 @@ class BeerListItemRepository( service: ServiceLocal) : BeerRepository {
                 .setEnablePlaceholders(false)
                 .build()
         beersList = LivePagedListBuilder<Int, BeerResult>(factoryItemKey, config).build()
-        return GroupActionLoadBeer(beersList,networkState,initialState)
+        return GroupActionLoadBeer(beersList, networkState, initialState)
     }
 }

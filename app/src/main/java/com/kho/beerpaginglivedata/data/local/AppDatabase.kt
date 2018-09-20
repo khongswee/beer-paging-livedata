@@ -4,7 +4,7 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.kho.beerpaginglivedata.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
 
 /**
  * Created by Administrator on 7/21/18.

@@ -3,10 +3,10 @@ package com.kho.beerpaginglivedata.unit_test.repository
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
 import android.arch.paging.PagedList
-import com.kho.beerpaginglivedata.data.model.BeerResult
-import com.kho.beerpaginglivedata.data.remote.BeerListPagedRepository
-import com.kho.beerpaginglivedata.data.remote.GroupActionLoadBeer
-import com.kho.beerpaginglivedata.data.remote.NetworkState
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.domain.BeerListPagedRepository
+import com.kho.beerpaginglivedata.features.domain.GroupActionLoadBeer
+import com.kho.beerpaginglivedata.base_domain.NetworkState
 import com.kho.beerpaginglivedata.unit_test.BeerReultMook
 import com.kho.beerpaginglivedata.unit_test.FakeBeerApi
 import com.kho.beerpaginglivedata.unit_test.RxImmediateSchedulerRule

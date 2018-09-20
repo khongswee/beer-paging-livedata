@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
 import android.arch.persistence.room.Query
-import com.kho.beerpaginglivedata.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
 import io.reactivex.Single
 
 /**

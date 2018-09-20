@@ -1,7 +1,6 @@
 package com.kho.beerpaginglivedata.data.local
 
-import com.kho.beerpaginglivedata.data.model.BeerModel
-import com.kho.beerpaginglivedata.data.model.BeerResult
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerModel
 import io.reactivex.Single
 
 interface BeerLocal {

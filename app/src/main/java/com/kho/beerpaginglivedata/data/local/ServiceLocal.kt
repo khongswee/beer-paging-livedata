@@ -2,9 +2,8 @@ package com.kho.beerpaginglivedata.data.local
 
 import android.content.Context
 import com.google.gson.Gson
-import com.kho.beerpaginglivedata.data.model.BeerModel
-import com.kho.beerpaginglivedata.data.model.BeerResult
-import com.kho.beerpaginglivedata.data.model.Pager
+import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerModel
+import com.kho.beerpaginglivedata.features.beerlist.data.model.Pager
 import io.reactivex.Single
 import java.io.IOException
 
