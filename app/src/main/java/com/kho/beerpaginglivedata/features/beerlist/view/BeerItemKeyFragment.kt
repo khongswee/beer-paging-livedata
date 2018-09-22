@@ -31,10 +31,10 @@ class BeerItemKeyFragment : Fragment() {
         val layoutManager = LinearLayoutManager(activity)
         val adapter = BeersListAdapter()
         val serviceLocal = context?.let { ServiceLocal(it) }
-        serviceLocal?.let {
-            val factoryViewModel = BeerViewModelImpl.Factory(PageListMode.ITEMKEY, BeerListItemRepository(serviceLocal))
-            viewModel = ViewModelProviders.of(activity!!, factoryViewModel).get(BeerViewModelImpl::class.java)
-        }
+//        serviceLocal?.let {
+//            val factoryViewModel = BeerViewModelImpl.Factory(PageListMode.ITEMKEY, BeerListItemRepository(serviceLocal))
+//            viewModel = ViewModelProviders.of(activity!!, factoryViewModel).get(BeerViewModelImpl::class.java)
+//        }
 
         rcBeers.layoutManager = layoutManager
         rcBeers.adapter = adapter

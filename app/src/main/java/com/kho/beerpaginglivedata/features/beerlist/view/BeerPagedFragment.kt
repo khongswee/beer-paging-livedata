@@ -19,6 +19,7 @@ import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
 import com.kho.beerpaginglivedata.features.beerlist.data.model.PageListMode
 import com.kho.beerpaginglivedata.features.domain.BeerListPagedRepository
 import com.kho.beerpaginglivedata.features.beerlist.viewmodel.BeerViewModelImpl
+import com.kho.beerpaginglivedata.features.domain.BeerUseCase
 import kotlinx.android.synthetic.main.fragment_main.*
 
 class BeerPagedFragment : Fragment() {
@@ -48,8 +49,11 @@ class BeerPagedFragment : Fragment() {
 
     private fun initFetchData() {
         val api = ServiceProvider.get().provideBeerService()
-        val factoryViewModel = BeerViewModelImpl.Factory(PageListMode.PAGED, BeerListPagedRepository(api))
+        val repo = BeerListPagedRepository(api)
+        val useCase = BeerUseCase(repo)
+        val factoryViewModel = BeerViewModelImpl.Factory(PageListMode.PAGED, repo, useCase)
         viewModel = ViewModelProviders.of(activity!!, factoryViewModel).get(BeerViewModelImpl::class.java)
+
 
         viewModel.getBeerList().observe(this, Observer<PagedList<BeerResult>> {
             adapter.submitList(it)

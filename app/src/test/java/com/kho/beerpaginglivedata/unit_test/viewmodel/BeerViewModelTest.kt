@@ -39,7 +39,7 @@ class BeerViewModelTest {
     @Before
     fun initViewmodel() {
         setUpMook()
-        viewmodel = BeerViewModelImpl(PageListMode.PAGED, repository)
+        viewmodel = BeerViewModelImpl(PageListMode.PAGED, repository, useCase, provider)
     }
 
     @Test

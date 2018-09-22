@@ -8,8 +8,9 @@ import com.kho.beerpaginglivedata.base_domain.NetworkState
 import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
 import com.kho.beerpaginglivedata.features.beerlist.data.model.PageListMode
 import com.kho.beerpaginglivedata.features.domain.BeerRepository
+import com.kho.beerpaginglivedata.features.domain.BeerUseCase
 
-class BeerViewModelImpl(mode: PageListMode, val repository: BeerRepository) : BeerViewModel() {
+class BeerViewModelImpl(mode: PageListMode, val repository: BeerRepository, val useCase: BeerUseCase) : BeerViewModel() {
     override fun getStateNetwork(): LiveData<NetworkState> = networkState
 
     override fun getBeerList(): LiveData<PagedList<BeerResult>> = beersList
@@ -17,11 +18,11 @@ class BeerViewModelImpl(mode: PageListMode, val repository: BeerRepository) : Be
     override fun getStateInitial(): LiveData<NetworkState> = initialState
 
     override fun onRefresh() {
-        repository.loadRefresh()
+        useCase.loadRefresh()
     }
 
     override fun onRetry() {
-        repository.loadRetry()
+        useCase.loadRetry()
     }
 
     private lateinit var networkState: LiveData<NetworkState>
@@ -29,18 +30,17 @@ class BeerViewModelImpl(mode: PageListMode, val repository: BeerRepository) : Be
     private lateinit var beersList: LiveData<PagedList<BeerResult>>
 
     init {
-        repository.loadBeer().let {
+        useCase.excute().let {
             beersList = it.pagedList
             networkState = it.networkState!!
             initialState = it.initialState!!
         }
-
     }
 
 
-    class Factory(val mode: PageListMode, val repository: BeerRepository) : ViewModelProvider.NewInstanceFactory() {
+    class Factory(val mode: PageListMode, val repository: BeerRepository, val useCase: BeerUseCase) : ViewModelProvider.NewInstanceFactory() {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return BeerViewModelImpl(mode, repository) as T
+            return BeerViewModelImpl(mode, repository, useCase) as T
 
         }
     }

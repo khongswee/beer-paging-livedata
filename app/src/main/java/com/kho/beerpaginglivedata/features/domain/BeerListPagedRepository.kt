@@ -1,16 +1,14 @@
 package com.kho.beerpaginglivedata.features.domain
 
-import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
-import android.arch.paging.LivePagedListBuilder
-import android.arch.paging.PagedList
+import com.kho.beerpaginglivedata.base_domain.NetworkState
 import com.kho.beerpaginglivedata.features.beerlist.data.datasource.pagekey.BeerPageKeyDataFactory
 import com.kho.beerpaginglivedata.features.beerlist.data.datasource.pagekey.BeerPageKeyDatasource
-import com.kho.beerpaginglivedata.base_domain.NetworkState
 import com.kho.beerpaginglivedata.features.beerlist.data.model.BeerResult
 import com.kho.beerpaginglivedata.features.beerlist.data.remote_service.BeerApi
+import pl.marchuck.pagingexample.data.BeerPagedListProvider
 
-class BeerListPagedRepository( api: BeerApi) : BeerRepository {
+class BeerListPagedRepository(api: BeerApi) : BeerRepository {
     val factoryPage = BeerPageKeyDataFactory(api)
     override fun loadRetry() {
         factoryPage.datasource.value?.loadRetry()
@@ -23,21 +21,11 @@ class BeerListPagedRepository( api: BeerApi) : BeerRepository {
     private val pageSize = 10
 
     override fun loadBeer(): GroupActionLoadBeer<BeerResult> {
-        var beersList: LiveData<PagedList<BeerResult>>
-        val config = PagedList.Config.Builder()
-                .setPageSize(pageSize)
-                .setInitialLoadSizeHint(pageSize * 2)
-                .setEnablePlaceholders(false)
-                .build()
-
         val networkState = Transformations.switchMap<BeerPageKeyDatasource, NetworkState>(
                 factoryPage.datasource, { it.networkState })
         val initialState = Transformations.switchMap<BeerPageKeyDatasource, NetworkState>(
                 factoryPage.datasource, { it.initialState })
-
-
-        beersList = LivePagedListBuilder<Int, BeerResult>(factoryPage, config).build()
-
-        return GroupActionLoadBeer(beersList, networkState, initialState)
+        val paged = BeerPagedListProvider(factoryPage)
+        return GroupActionLoadBeer(paged.provide(), networkState, initialState)
     }
 }

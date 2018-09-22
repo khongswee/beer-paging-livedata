@@ -30,11 +30,11 @@ class BeerPositionalFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val layoutManager = LinearLayoutManager(activity!!)
         val adapter = BeersListAdapter()
-        val serviceLocal = context?.let { ServiceLocal(it) }
-        serviceLocal?.let {
-            val factoryViewModel = BeerViewModelImpl.Factory(PageListMode.POSITIONAL, BeerListPositionalRepository(serviceLocal))
-            viewModel = ViewModelProviders.of(activity!!, factoryViewModel).get(BeerViewModelImpl::class.java)
-        }
+//        val serviceLocal = context?.let { ServiceLocal(it) }
+//        serviceLocal?.let {
+//            val factoryViewModel = BeerViewModelImpl.Factory(PageListMode.POSITIONAL, BeerListPositionalRepository(serviceLocal))
+//            viewModel = ViewModelProviders.of(activity!!, factoryViewModel).get(BeerViewModelImpl::class.java)
+//        }
 
         rcBeers.layoutManager = layoutManager
         rcBeers.adapter = adapter
