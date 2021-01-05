@@ -1,0 +1,39 @@
+language: android
+jdk: oraclejdk8
+
+notifications:
+  email: true
+
+branches:
+  only:
+    - master
+
+android:
+  components:
+    - tools
+    - platform-tools
+    - tools
+    - build-tools-25.0.2
+    - android-25
+    - extra-google-m2repository
+    - extra-android-m2repository
+
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+
+script:
+  ./gradlew clean build
+
+deploy:
+  provider: releases
+  file_glob: true
+  file: app/build/outputs/apk/*.apk
+  skip_cleanup: true
+
+  on:
+    repo: khongswee/beer-paging-livedata
+    jdk: oraclejdk8
+  api_key:
+    secure: ab4f67c466ab02514daae619c77c9e4875dcf999
